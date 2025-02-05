@@ -1,13 +1,20 @@
-import { BASE_URL } from "../constants";
+import { BASE_URL, GENRE_CODES } from "../constants";
 import { xmlToJson } from "../utils/xmlToJson";
 import { Performance } from "../types/performance";
 const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
 
-export async function fetchPerformanceList(): Promise<Performance[]> {
+export async function fetchPerformanceList(
+  pageParam: number,
+  genre: string
+): Promise<Performance[]> {
   try {
+    const genreCode = GENRE_CODES[genre] || "";
+
     const response = await fetch(
       `https://api.allorigins.win/get?url=${encodeURIComponent(
-        `${BASE_URL}/pblprfr?service=${API_KEY}&stdate=20250101&eddate=20251231&cpage=1&rows=10`
+        `${BASE_URL}/pblprfr?service=${API_KEY}&stdate=20250101&eddate=20251231&cpage=${pageParam}&rows=100${
+          genreCode ? `&shcate=${genreCode}` : ""
+        }`
       )}`
     );
 
