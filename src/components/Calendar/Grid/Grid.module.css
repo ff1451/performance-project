@@ -1,0 +1,34 @@
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-grid__cell--empty {
+  padding: 12px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.calendar-grid__cell {
+  padding: 12px;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar-grid__cell--selected {
+  background-color: #add8e6;
+}
+
+.calendar-grid__marker {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 12px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+}
