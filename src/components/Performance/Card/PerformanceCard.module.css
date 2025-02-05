@@ -1,0 +1,102 @@
+.performance__card {
+  display: flex;
+  width: 333px;
+  margin-top: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.performance__card-poster {
+  width: 100px;
+  height: 150px;
+}
+
+.performance__card-info {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.performance__card-genre {
+  font-size: 12px;
+  padding: 3px;
+}
+
+.performance__card-genre--연극 {
+  color: #de8383;
+  background-color: #fff9f4;
+  border: 1px solid #de8383;
+}
+
+.performance__card-genre--서양음악클래식 {
+  color: #a391d2;
+  background-color: #f4faff;
+  border: 1px solid #a391d2;
+}
+
+.performance__card-genre--대중음악 {
+  color: #2c2a2a;
+  background-color: #f6f8f8;
+  border: 1px solid #2c2a2a;
+}
+
+.performance__card-genre--뮤지컬 {
+  color: #257dd7;
+  background-color: #f4faff;
+  border: 1px solid #257dd7;
+}
+
+.performance__card-genre--한국음악국악 {
+  color: #868608;
+  background-color: #ffffe4;
+  border: 1px solid #868608;
+}
+.performance__card-genre--서커스마술 {
+  color: #c27fbb;
+  background-color: #fcf3fb;
+  border: 1px solid #c27fbb;
+}
+
+.performance__card-genre--무용 {
+  color: #449496;
+  background-color: #f3fdfd;
+  border: 1px solid #449496;
+}
+
+.performance__card-genre--대중무용 {
+  color: rgb(5, 82, 83);
+  background-color: #f3fdfd;
+  border: 1px solid rgb(5, 82, 83);
+}
+
+.performance__card-genre--복합 {
+  color: #636363;
+  background-color: #f2f2f2;
+  border: 1px solid #636363;
+}
+.performance__card-link {
+  text-decoration: none;
+}
+
+.performance__card-title {
+  height: 80px;
+  font-size: 15px;
+  margin: 0;
+  margin-top: 7px;
+  text-decoration: none;
+  color: black;
+}
+
+.performance__card-detail {
+  margin-top: 5px;
+}
+
+.performance__card-text-label {
+  font-weight: 700;
+  color: gray;
+}
+
+.performance__card-text {
+  font-size: 13px;
+  margin: 0;
+  color: gray;
+}
