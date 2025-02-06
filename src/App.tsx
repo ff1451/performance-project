@@ -7,17 +7,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import PerformanceDetail from "./pages/PerformanceDetail/PerformanceDetail";
 
 const queryClient = new QueryClient();
-
+const basename = "/performance-project";
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
+      <Router basename={basename}>
         <Header />
         <main className="main">
           <Routes>
-            <Route path="" element={<Home />} />
-            <Route path="/performances" element={<PerformanceListPage />} />
-            <Route path="/performances/:id" element={<PerformanceDetail />} />
+            <Route path="/" element={<Home />} />
+            <Route path="performances" element={<PerformanceListPage />} />
+            <Route path="performances/:id" element={<PerformanceDetail />} />
           </Routes>
         </main>
       </Router>
