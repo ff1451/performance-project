@@ -1,0 +1,39 @@
+.detail__content {
+  display: flex;
+  align-items: center;
+}
+
+.detail__poster-container {
+  width: 350px;
+  height: 420px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  margin-right: 20px;
+}
+
+.detail__poster {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+.detail__table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.detail__table th,
+.detail__table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.detail__table th {
+  font-weight: bold;
+  color: #555;
+  min-width: 150px;
+  border-right: 1px solid #ddd;
+}
+
+.detail__table td {
+  color: #777;
+}

@@ -1,0 +1,99 @@
+.detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.detail__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detail__title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #30475e;
+  font-family: "Cormorant Garamond", serif;
+  margin: 0;
+}
+
+.detail__genre {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 20px;
+  margin-left: 20px;
+}
+
+.detail__genre--연극 {
+  color: #de8383;
+  background-color: #fff9f4;
+  border: 1px solid #de8383;
+}
+
+.detail__genre--서양음악클래식 {
+  color: #a391d2;
+  background-color: #f4faff;
+  border: 1px solid #a391d2;
+}
+
+.detail__genre--대중음악 {
+  color: #2c2a2a;
+  background-color: #f6f8f8;
+  border: 1px solid #2c2a2a;
+}
+
+.detail__genre--뮤지컬 {
+  color: #257dd7;
+  background-color: #f4faff;
+  border: 1px solid #257dd7;
+}
+
+.detail__genre--한국음악국악 {
+  color: #868608;
+  background-color: #ffffe4;
+  border: 1px solid #868608;
+}
+.detail__genre--서커스마술 {
+  color: #c27fbb;
+  background-color: #fcf3fb;
+  border: 1px solid #c27fbb;
+}
+
+.detail__genre--무용 {
+  color: #449496;
+  background-color: #f3fdfd;
+  border: 1px solid #449496;
+}
+
+.detail__genre--대중무용 {
+  color: rgb(5, 82, 83);
+  background-color: #f3fdfd;
+  border: 1px solid rgb(5, 82, 83);
+}
+
+.detail__genre--복합 {
+  color: #636363;
+  background-color: #f2f2f2;
+  border: 1px solid #636363;
+}
+
+.detail__booking-button {
+  background: #f44336;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.detail__booking-button:hover {
+  background: #c62828;
+}
