@@ -1,0 +1,10 @@
+.review-list {
+  margin-top: 20px;
+}
+.review-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+.review-item strong {
+  color: navy;
+}

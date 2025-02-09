@@ -1,0 +1,31 @@
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-form__input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.review-form__textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.review-form__select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.review-form__button {
+  background-color: navy;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
