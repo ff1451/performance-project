@@ -1,0 +1,38 @@
+.footer {
+  background: #2c3e50;
+  color: #ffffff;
+  padding: 20px 20px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 50px;
+}
+
+.container {
+  max-width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.legal {
+  font-size: 13px;
+  color: #bbbbbb;
+  max-width: 800px;
+}
+
+.legal a {
+  color: #f4a261;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease-in-out;
+}
+
+.legal p {
+  margin: 0;
+}
+
+.legal a:hover {
+  color: #e76f51;
+}
