@@ -5,7 +5,7 @@ import CalendarNav from "./Navigation/CalendarNav";
 import { CalendarHeader } from "./Header/CalendarHeader";
 import { CalendarGrid } from "./Grid/CalendarGrid";
 import { PerformanceList } from "./PerformanceList/PerformanceList";
-
+import styles from "./Calendar.module.css";
 interface CalendarProps {
   initialYear: number;
   initialMonth: number;
@@ -49,25 +49,27 @@ function Calendar({ initialYear, initialMonth, performances }: CalendarProps) {
 
   return (
     <>
-      <CalendarNav
-        year={currentYear}
-        month={currentMonth}
-        onPrevMonth={handlePrevMonth}
-        onNextMonth={handleNextMonth}
-      />
-
-      <div style={{ display: "flex" }}>
-        <div className="calendar-grid">
-          <CalendarHeader />
-          <CalendarGrid
-            cells={calendarCells}
-            selectedDate={selectedDate}
-            performanceMap={performanceMap}
-            onDateSelect={setSelectedDate}
-            currentMonth={currentMonth}
-            currentYear={currentYear}
+      <div className={styles["container"]}>
+        <div className={styles["calendar-section"]}>
+          <CalendarNav
+            year={currentYear}
+            month={currentMonth}
+            onPrevMonth={handlePrevMonth}
+            onNextMonth={handleNextMonth}
           />
-
+          <CalendarHeader />
+          <div>
+            <CalendarGrid
+              cells={calendarCells}
+              selectedDate={selectedDate}
+              performanceMap={performanceMap}
+              onDateSelect={setSelectedDate}
+              currentMonth={currentMonth}
+              currentYear={currentYear}
+            />
+          </div>
+        </div>
+        <div className={styles["performance-list"]}>
           <PerformanceList
             performances={
               selectedDate ? performanceMap[selectedDate] || [] : []

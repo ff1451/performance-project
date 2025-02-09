@@ -43,7 +43,7 @@ export function CalendarGrid({
           >
             {day}
             {hasPerformance && (
-              <span className={styles["calendar-grid__marker"]}>★</span>
+              <span className={styles["calendar-grid__marker"]}></span>
             )}
           </div>
         );

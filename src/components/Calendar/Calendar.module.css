@@ -1,0 +1,11 @@
+.container {
+  margin-left: 40px;
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.performance-list {
+  display: flex;
+  margin-top: 90px;
+}
