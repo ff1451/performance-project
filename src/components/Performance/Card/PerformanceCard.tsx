@@ -29,12 +29,17 @@ export default function PerformanceCard({
   return (
     <li className={styles["performance__card"]}>
       <div>
-        <Link to={`/performance/${performance.id}`}>
-          <img
-            src={performance.poster}
-            alt={performance.name}
-            className={styles["performance__card-poster"]}
-          ></img>
+        <Link
+          to={`/performances/${performance.id}`}
+          className={styles["performance__card-link"]}
+        >
+          <div className={styles["performance__card-image-wrapper"]}>
+            <img
+              src={performance.poster}
+              alt={performance.name}
+              className={styles["performance__card-poster"]}
+            />
+          </div>
         </Link>
       </div>
 
@@ -45,7 +50,7 @@ export default function PerformanceCard({
           {performance.genre}
         </span>
         <Link
-          to={`/performance/${performance.id}`}
+          to={`/performances/${performance.id}`}
           className={styles["performance__card-link"]}
         >
           <h4 className={styles["performance__card-title"]}>
