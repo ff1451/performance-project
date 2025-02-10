@@ -6,6 +6,5 @@ export const useBookingRanking = () => {
     queryKey: ["bookingRanking"],
     queryFn: fetchBookingRanking,
     staleTime: 30 * 60 * 1000,
-    refetchOnWindowFocus: false,
   });
 };
