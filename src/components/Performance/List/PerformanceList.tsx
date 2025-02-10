@@ -1,17 +1,18 @@
 import styles from "./PerformanceList.module.css";
 import { usePerformanceList } from "@/hooks/usePerformanceList";
-import { useState } from "react";
 import PerformanceCard from "@/components/Performance/Card/PerformanceCard";
 import PerformanceCategoryNav from "@/components/Performance/CategoryNav/PerformanceCategoryNav";
 import Pagination from "@/components/Performance/Pagination/Pagination";
+import { usePerformanceListStore } from "@/stores/usePerformanceListStore";
 
 const PAGE_SIZE = 18;
 
 export default function PerformanceList() {
-  const [selectedCategory, setSelectedCategory] = useState("전체");
+  const { selectedCategory, currentPage, setCurrentPage } =
+    usePerformanceListStore();
+
   const { data, fetchNextPage, hasNextPage } =
     usePerformanceList(selectedCategory);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const allPerformances = data?.pages.flat() || [];
 
@@ -33,10 +34,7 @@ export default function PerformanceList() {
 
   return (
     <div className={styles["performance"]}>
-      <PerformanceCategoryNav
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <PerformanceCategoryNav />
       <div className={styles["performance__list-container"]}>
         <ul className={styles["performance__list"]}>
           {paginatedData.map((item) => (
