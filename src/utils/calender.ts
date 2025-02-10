@@ -5,9 +5,9 @@ export function DateFormatter(
   month: number,
   day: number
 ): string {
-  const dayString = day < 10 ? `0${day}` : day.toString();
-  const monthString = month < 10 ? `0${month}` : month.toString();
-  return `${year}-${monthString}-${dayString}`;
+  return `${year}-${month.toString().padStart(2, "0")}-${day
+    .toString()
+    .padStart(2, "0")}`;
 }
 
 export function groupPerformancesByDate(
