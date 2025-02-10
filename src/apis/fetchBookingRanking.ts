@@ -1,13 +1,16 @@
-import { boxoffice } from "../types/performance";
-import { BASE_URL } from "../constants";
-import { xmlToJson } from "../utils/xmlToJson";
+import { boxoffice } from "@/types/performance";
+import { BASE_URL } from "@/constants";
+import { xmlToJson } from "@/utils/xmlToJson";
+import { getRelativeDateRange } from "@/utils/date";
 
 const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
 
 export async function fetchBookingRanking(): Promise<boxoffice[]> {
   try {
+    const { stdate, eddate } = getRelativeDateRange(31);
+
     const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
-      `${BASE_URL}/boxoffice?service=${API_KEY}&stdate=20250101&eddate=20250131`
+      `${BASE_URL}/boxoffice?service=${API_KEY}&stdate=${stdate}&eddate=${eddate}`
     )}`;
 
     const response = await fetch(url);

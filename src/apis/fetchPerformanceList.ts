@@ -1,21 +1,33 @@
-import { BASE_URL, GENRE_CODES } from "../constants";
-import { xmlToJson } from "../utils/xmlToJson";
-import { Performance } from "../types/performance";
+import { BASE_URL, GENRE_CODES } from "@/constants";
+import { xmlToJson } from "@/utils/xmlToJson";
+import { Performance } from "@/types/performance";
+import { getMonthRange } from "@/utils/date";
 const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
 
 export async function fetchPerformanceList(
   pageParam: number,
-  genre: string
+  genre: string,
+  year?: number,
+  month?: number
 ): Promise<Performance[]> {
   try {
     const genreCode = GENRE_CODES[genre] || "";
 
+    let stdate = "20250101";
+    let eddate = "20251231";
+
+    if (year && month) {
+      const range = getMonthRange(year, month);
+      stdate = range.stdate;
+      eddate = range.eddate;
+    }
+
+    const url = `${BASE_URL}/pblprfr?service=${API_KEY}&stdate=${stdate}&eddate=${eddate}&cpage=${pageParam}&rows=100${
+      genreCode ? `&shcate=${genreCode}` : ""
+    }`;
+
     const response = await fetch(
-      `https://api.allorigins.win/get?url=${encodeURIComponent(
-        `${BASE_URL}/pblprfr?service=${API_KEY}&stdate=20250101&eddate=20251231&cpage=${pageParam}&rows=100${
-          genreCode ? `&shcate=${genreCode}` : ""
-        }`
-      )}`
+      `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
     );
 
     const { contents } = await response.json();
