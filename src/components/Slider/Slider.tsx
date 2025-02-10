@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Slider.module.css";
 import { boxoffice } from "../../types/performance";
+import { Link } from "react-router-dom";
+import { DirectionButton } from "../UI/DirectionButton";
 
 interface SliderProps {
   data: boxoffice[];
@@ -26,11 +28,11 @@ export default function Slider({ data }: SliderProps) {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    intervalRef.current = window.setInterval(nextSlide, 20000);
+    intervalRef.current = window.setInterval(nextSlide, 2000);
   };
 
   useEffect(() => {
-    intervalRef.current = window.setInterval(nextSlide, 20000);
+    intervalRef.current = window.setInterval(nextSlide, 2000);
     return () => {
       if (intervalRef.current !== null) clearInterval(intervalRef.current);
     };
@@ -41,21 +43,11 @@ export default function Slider({ data }: SliderProps) {
       <div className={styles["slider-container__left"]}>
         <h2 className={styles["slider-container__title"]}>예매 순위</h2>
         <div className={styles["slider-container__button-container"]}>
-          <button
-            className={styles["slider-container__button"]}
-            onClick={prevSlide}
-          >
-            ◀
-          </button>
+          <DirectionButton direction="prev" onClick={prevSlide} />
           <span className={styles["slider-container__page"]}>
             {currentPage + 1} / {totalPages}
           </span>
-          <button
-            className={styles["slider-container__button"]}
-            onClick={nextSlide}
-          >
-            ▶
-          </button>
+          <DirectionButton direction="next" onClick={nextSlide} />
         </div>
       </div>
 
@@ -65,15 +57,24 @@ export default function Slider({ data }: SliderProps) {
             .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
             .map((item) => (
               <div key={item.id} className={styles["slider-wrapper__item"]}>
-                <img
-                  src={item.poster}
-                  alt={item.name}
-                  className={styles["slider-wrapper__image"]}
-                />
+                <Link to={`/performances/${item.id}`}>
+                  <img
+                    src={item.poster}
+                    alt={item.name}
+                    className={styles["slider-wrapper__image"]}
+                  />
+                </Link>
+
                 <div className={styles["slider-wrapper__text"]}>
-                  <h3 className={styles["slider-wrapper__name"]}>
-                    {item.name}
-                  </h3>
+                  <Link
+                    to={`/performances/${item.id}`}
+                    className={styles["slider-wrapper__link"]}
+                  >
+                    <h3 className={styles["slider-wrapper__name"]}>
+                      {item.name}
+                    </h3>
+                  </Link>
+
                   <p className={styles["slider-wrapper__period"]}>
                     {item.period}
                   </p>

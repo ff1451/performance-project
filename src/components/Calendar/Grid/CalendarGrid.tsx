@@ -1,22 +1,19 @@
 import { DateFormatter } from "@/utils/calender";
 import styles from "./Grid.module.css";
+import { useCalendarStore } from "@/stores/useCalendarStore";
 interface CalendarGridProps {
   cells: (number | null)[];
-  selectedDate: string | null;
   performanceMap: Record<string, any[]>;
-  currentYear: number;
-  currentMonth: number;
-  onDateSelect: (date: string) => void;
 }
 
 export function CalendarGrid({
   cells,
-  selectedDate,
+
   performanceMap,
-  currentYear,
-  currentMonth,
-  onDateSelect,
 }: CalendarGridProps) {
+  const { currentYear, currentMonth, selectedDate, setSelectedDate } =
+    useCalendarStore();
+
   return (
     <div className={styles["calendar-grid"]}>
       {cells.map((day, idx) => {
@@ -34,7 +31,7 @@ export function CalendarGrid({
         return (
           <div
             key={idx}
-            onClick={() => onDateSelect(date)}
+            onClick={() => setSelectedDate(date)}
             className={`${styles["calendar-grid__cell"]} ${
               selectedDate === date
                 ? styles["calendar-grid__cell--selected"]

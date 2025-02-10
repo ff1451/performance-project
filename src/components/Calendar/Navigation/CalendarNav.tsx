@@ -1,29 +1,36 @@
+import { useCalendarStore } from "@/stores/useCalendarStore";
 import styles from "./CalendarNav.module.css";
+import { DirectionButton } from "@/components/UI/DirectionButton";
 
-interface CalendarNavProps {
-  year: number;
-  month: number;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
-}
+export default function CalendarNav() {
+  const { currentYear, setCurrentYear, currentMonth, setCurrentMonth } =
+    useCalendarStore();
 
-export default function CalendarNav({
-  year,
-  month,
-  onPrevMonth,
-  onNextMonth,
-}: CalendarNavProps) {
+  const handlePrevMonth = () => {
+    if (currentMonth === 1) {
+      setCurrentYear(currentYear - 1);
+      setCurrentMonth(12);
+    } else {
+      setCurrentMonth(currentMonth - 1);
+    }
+  };
+
+  const handleNextMonth = () => {
+    if (currentMonth === 12) {
+      setCurrentYear(currentYear + 1);
+      setCurrentMonth(1);
+    } else {
+      setCurrentMonth(currentMonth + 1);
+    }
+  };
+
   return (
     <div className={styles["calendar-nav"]}>
-      <button className={styles["calendar-nav__button"]} onClick={onPrevMonth}>
-        ◀
-      </button>
+      <DirectionButton direction="prev" onClick={handlePrevMonth} />
       <h2
         className={styles["calendar-nav__title"]}
-      >{`${year}년 ${month}월`}</h2>
-      <button className={styles["calendar-nav__button"]} onClick={onNextMonth}>
-        ▶
-      </button>
+      >{`${currentYear}년 ${currentMonth}월`}</h2>
+      <DirectionButton direction="next" onClick={handleNextMonth} />
     </div>
   );
 }

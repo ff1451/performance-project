@@ -1,0 +1,17 @@
+.direction-button {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  background: none;
+  border: 2px solid #30475e;
+  font-size: 18px;
+  cursor: pointer;
+  color: #30475e;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.direction-button:hover {
+  background-color: #30475e;
+  color: white;
+}

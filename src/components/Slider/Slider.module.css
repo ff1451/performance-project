@@ -32,25 +32,6 @@
   width: 60%;
 }
 
-.slider-container__button {
-  text-align: center;
-  /* margin-top: 8px; */
-  background-color: transparent;
-  color: #30475e;
-  border: 2px solid #30475e;
-  width: 35px;
-  height: 35px;
-  font-size: 18px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-.slider-container__button:hover {
-  background-color: #30475e;
-  color: white;
-}
-
 .slider-container__right {
   width: 80%;
   /* overflow: hidden; */
@@ -86,6 +67,10 @@
 
 .slider-wrapper__text {
   margin-top: 10px;
+}
+
+.slider-wrapper__link {
+  text-decoration: none;
 }
 
 .slider-wrapper__name {
