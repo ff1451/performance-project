@@ -1,9 +1,26 @@
 import { Link } from "react-router-dom";
+import { Search } from "lucide-react";
 import styles from "./Header.module.css";
+import logo from "@/assets/logo.png";
+import AuthButton from "./AuthButton/AuthButton";
+import { useState } from "react";
+import LoginModal from "../LoginModal/LoginModal";
+
 export function Header() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const modalOpenHandler = () => {
+    setShowLoginModal(true);
+  };
+
+  const modalCloseHandler = () => {
+    setShowLoginModal(false);
+  };
+
   return (
     <header className={styles.header}>
       <Link className={styles.header__link} to="">
+        <img src={logo} alt="로고" className={styles.header__logoImage} />
         <h1 className={styles.header__logo}>공연 정보 알리미</h1>
       </Link>
 
@@ -16,12 +33,12 @@ export function Header() {
           </li>
           <li>
             <Link to="/reviews" className={styles.nav__item}>
-              리뷰
+              임시
             </Link>
           </li>
           <li>
             <Link to="/schedule" className={styles.nav__item}>
-              일정
+              임시
             </Link>
           </li>
         </ul>
@@ -34,9 +51,13 @@ export function Header() {
           placeholder="검색"
         />
         <button className={styles.search__button} type="submit">
-          검색
+          <Search />
         </button>
       </form>
+
+      <AuthButton onOpen={modalOpenHandler} />
+
+      {showLoginModal && <LoginModal onClose={modalCloseHandler} />}
     </header>
   );
 }
