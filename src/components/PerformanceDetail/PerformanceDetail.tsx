@@ -1,4 +1,5 @@
 import { usePerformanceDetail } from "@/hooks/usePerformanceDetail";
+import { usePerformanceDetailByThing } from "@/hooks/thingproxy/usePerformanceDetailByThing";
 import styles from "./PerformanceDetail.module.css";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -18,7 +19,7 @@ export default function PerformanceDetail() {
     return <div className={styles["error-message"]}>잘못된 접근</div>;
   }
 
-  const { data } = usePerformanceDetail(id);
+  const { data } = usePerformanceDetailByThing(id);
 
   if (!data) {
     return (
