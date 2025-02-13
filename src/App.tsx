@@ -9,7 +9,7 @@ import Footer from "./components/Footer/Footer";
 import SignUp from "./components/SignUp/SignUp";
 
 const queryClient = new QueryClient();
-const basename = "/performance-project";
+// const basename = "/performance-project";
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

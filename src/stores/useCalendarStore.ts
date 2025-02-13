@@ -1,9 +1,4 @@
-import { Performance } from "@/types/performance";
 import { create } from "zustand";
-
-const today = new Date();
-const defaultYear = today.getFullYear();
-const defaultMonth = today.getMonth() + 1;
 
 interface CalendarState {
   currentYear: number;

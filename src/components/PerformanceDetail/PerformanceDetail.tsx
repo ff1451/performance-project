@@ -1,6 +1,4 @@
 import { usePerformanceDetail } from "@/hooks/usePerformanceDetail";
-import { usePerformanceDetailByThing } from "@/hooks/thingproxy/usePerformanceDetailByThing";
-import styles from "./PerformanceDetail.module.css";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import BookingModal from "@/components/BookingModal/BookingModal";
@@ -9,6 +7,7 @@ import Info from "@/components/PerformanceDetail/PerformanceInfo/Info";
 import Tab from "@/components/PerformanceDetail/Tab/Tab";
 import DetailBody from "@/components/PerformanceDetail/DetailBody/DetailBody";
 import ReviewSection from "@/components/Review/ReviewSection";
+import styles from "./PerformanceDetail.module.css";
 
 export default function PerformanceDetail() {
   const { id } = useParams();
@@ -19,7 +18,7 @@ export default function PerformanceDetail() {
     return <div className={styles["error-message"]}>잘못된 접근</div>;
   }
 
-  const { data } = usePerformanceDetailByThing(id);
+  const { data } = usePerformanceDetail(id);
 
   if (!data) {
     return (
@@ -39,7 +38,7 @@ export default function PerformanceDetail() {
       {activeTab === "info" ? (
         <DetailBody performance={data} />
       ) : (
-        <ReviewSection performanceId={id} />
+        <ReviewSection performanceId={id} performanceName={data.name} />
       )}
 
       <BookingModal

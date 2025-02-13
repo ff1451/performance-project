@@ -1,6 +1,6 @@
 import { useCalendarStore } from "@/stores/useCalendarStore";
 import styles from "./CalendarNav.module.css";
-import { DirectionButton } from "@/components/UI/DirectionButton";
+import { DirectionButton } from "@/components/UI/DirectionButton/DirectionButton";
 
 export default function CalendarNav() {
   const { currentYear, setCurrentYear, currentMonth, setCurrentMonth } =

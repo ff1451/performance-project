@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import styles from "./Slider.module.css";
-import { boxoffice } from "../../types/performance";
+import { boxoffice } from "@/types/performance";
 import { Link } from "react-router-dom";
-import { DirectionButton } from "../UI/DirectionButton";
+import { DirectionButton } from "@/components/UI/DirectionButton/DirectionButton";
+import styles from "./Slider.module.css";
 
 interface SliderProps {
   data: boxoffice[];
@@ -15,13 +15,17 @@ export default function Slider({ data }: SliderProps) {
   const intervalRef = useRef<number | null>(null);
 
   const nextSlide = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
-    resetTimer();
+    if (totalPages > 0) {
+      setCurrentPage((prev) => (prev + 1) % totalPages);
+      resetTimer();
+    }
   };
 
   const prevSlide = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-    resetTimer();
+    if (totalPages > 0) {
+      setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+      resetTimer();
+    }
   };
 
   const resetTimer = () => {
@@ -32,11 +36,13 @@ export default function Slider({ data }: SliderProps) {
   };
 
   useEffect(() => {
-    intervalRef.current = window.setInterval(nextSlide, 2000);
+    if (data.length > 0) {
+      intervalRef.current = window.setInterval(nextSlide, 2000);
+    }
     return () => {
       if (intervalRef.current !== null) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [data, totalPages]);
 
   return (
     <div className={styles["slider-container"]}>

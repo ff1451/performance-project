@@ -1,6 +1,6 @@
 import { usePerformanceListStore } from "@/stores/usePerformanceListStore";
 import styles from "./PerformanceCategoryNav.module.css";
-import { categories } from "@/constants";
+import { categories } from "@/constants/category";
 
 export default function PerformanceCategoryNav() {
   const { selectedCategory, setSelectedCategory } = usePerformanceListStore();
