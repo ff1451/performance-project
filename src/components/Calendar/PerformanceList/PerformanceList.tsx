@@ -21,10 +21,10 @@ export function PerformanceList({ performances }: PerformanceListProps) {
                 {performance.name}
               </h4>
               <p className={styles["performance-list__item-info"]}>
-                📍공연장 : {performance.place}
+                🏟️ 공연장 : {performance.place}
               </p>
               <p className={styles["performance-list__item-info"]}>
-                🎭장르 : {performance.genre}
+                🎭 장르 : {performance.genre}
               </p>
               <p className={styles["performance-list__item-info"]}>
                 📅 상태 : {performance.state}
