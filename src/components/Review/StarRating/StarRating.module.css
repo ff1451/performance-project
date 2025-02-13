@@ -1,0 +1,39 @@
+.star-rating__container {
+  display: flex;
+  align-items: center;
+}
+
+.star-rating__svg {
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.star-rating__stars {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 0;
+}
+
+.star-rating__star {
+  transition: fill 0.2s;
+}
+
+.star-rating__star--interactive {
+  cursor: pointer;
+}
+
+.star-rating__star--interactive:hover {
+  transform: scale(1.1);
+}
+
+.star-rating__value {
+  margin-left: 5px;
+  padding-bottom: 4px;
+  font-weight: bold;
+  color: navy;
+  min-width: 35px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
