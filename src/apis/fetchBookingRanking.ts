@@ -1,7 +1,8 @@
 import { boxoffice } from "@/types/performance";
-import { BASE_URL } from "@/constants";
+import { BASE_URL, getProxyUrls } from "@/constants/url";
 import { xmlToJson } from "@/utils/xmlToJson";
 import { getRelativeDateRange } from "@/utils/date";
+import { fetchWithFallback } from "@/utils/fetchWithFallBack";
 
 const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
 
@@ -9,17 +10,14 @@ export async function fetchBookingRanking(): Promise<boxoffice[]> {
   try {
     const { stdate, eddate } = getRelativeDateRange(31);
 
-    const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
-      `${BASE_URL}/boxoffice?service=${API_KEY}&stdate=${stdate}&eddate=${eddate}`
-    )}`;
+    const defaultUrl = `${BASE_URL}/boxoffice?service=${API_KEY}&stdate=${stdate}&eddate=${eddate}`;
 
-    const response = await fetch(url);
-    console.log(url);
+    const proxyUrls = getProxyUrls(defaultUrl);
 
-    const { contents } = await response.json();
-    console.log(contents);
+    const xmlString = await fetchWithFallback(proxyUrls);
+    console.log("받아온 XML:", xmlString);
 
-    const data = xmlToJson(contents);
+    const data = xmlToJson(xmlString);
     console.log("변환된 JSON 데이터:", data);
 
     const rankings = data.boxof;

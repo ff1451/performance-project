@@ -1,6 +1,3 @@
-export const BASE_URL = "http://kopis.or.kr/openApi/restful";
-export const IMAGE_URL = "http://www.kopis.or.kr/upload/pfmPoster";
-
 export const categories = [
   { category: "전체" },
   { category: "연극" },

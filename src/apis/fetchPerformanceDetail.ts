@@ -1,6 +1,7 @@
-import { BASE_URL } from "../constants";
-import { PerformanceDetail } from "../types/performance";
-import { xmlToJson } from "../utils/xmlToJson";
+import { BASE_URL, getProxyUrls } from "@/constants/url";
+import { PerformanceDetail } from "@/types/performance";
+import { fetchWithFallback } from "@/utils/fetchWithFallBack";
+import { xmlToJson } from "@/utils/xmlToJson";
 
 const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
 
@@ -8,17 +9,13 @@ export async function fetchPerformanceDetail(
   id: string
 ): Promise<PerformanceDetail | null> {
   try {
-    const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
-      `${BASE_URL}/pblprfr/${id}?service=${API_KEY}`
-    )}`;
+    const defaultUrl = `${BASE_URL}/pblprfr/${id}?service=${API_KEY}`;
 
-    const response = await fetch(url);
-    console.log(url);
+    const proxyUrls = getProxyUrls(defaultUrl);
+    const xmlString = await fetchWithFallback(proxyUrls);
+    console.log("받아온 XML:", xmlString);
 
-    const { contents } = await response.json();
-    console.log(contents);
-
-    const data = xmlToJson(contents);
+    const data = xmlToJson(xmlString);
     console.log("변환된 JSON 데이터:", data);
 
     const performanceData = data.db;
