@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/UI/Input/Input";
 import styles from "./Signup.module.css";
 import { validateEmail } from "@/utils/validate";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ export default function Signup() {
 
     const userData = { email, nickname, password };
     localStorage.setItem(email, JSON.stringify(userData));
+
+    useAuthStore.getState().login(email, nickname);
 
     alert("회원가입 완료!");
     navigate("/");
@@ -67,7 +70,7 @@ export default function Signup() {
       </div>
       {error && <p className={styles["signUp__error-message"]}>{error}</p>}
       <button
-        className={styles["signup__button"]}
+        className={styles["signUp__button"]}
         onClick={handleSignup}
         disabled={!!error}
       >
