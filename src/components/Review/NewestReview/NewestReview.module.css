@@ -1,0 +1,93 @@
+.review-list {
+  margin-top: 90px;
+  width: 400px;
+  background-color: #fdfdfd;
+  border-radius: 16px;
+  border: 1px solid #d1d1d1;
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-height: 340px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #a0a0a0 #f5f5f5;
+}
+
+.review-list::-webkit-scrollbar {
+  width: 8px;
+}
+.review-list::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+.review-list::-webkit-scrollbar-thumb {
+  background: #a0a0a0;
+  border-radius: 4px;
+}
+
+.review-list__title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #30475e;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-family: "Cormorant Garamond", serif;
+  text-align: center;
+}
+
+.review-list__items {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-list__item {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 10px;
+  border-left: 5px solid #d35400;
+  transition: transform 0.2s ease-in-out;
+}
+
+.review-list__item:hover {
+  transform: scale(1.02);
+}
+
+.review-list__item-title {
+  font-size: 17px;
+  font-weight: bold;
+  color: #222;
+  font-family: "Lato", serif;
+  margin: 0;
+}
+
+.review-list__item-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.review-list__item-comment {
+  font-size: 14px;
+  color: #555;
+  font-family: "Lato", serif;
+  margin: 5px 0;
+}
+
+.review-list__item-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #777;
+  font-family: "Lato", serif;
+}
+
+.review-list__empty {
+  padding: 12px;
+  text-align: center;
+  color: #777;
+  font-family: "Lato", serif;
+  font-size: 14px;
+}
