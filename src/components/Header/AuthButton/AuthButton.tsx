@@ -9,15 +9,7 @@ interface AuthButtonProps {
 }
 
 export default function AuthButton({ onOpen }: AuthButtonProps) {
-  const { isLoggedIn, logout } = useAuthStore();
-
-  const handleAuthClick = () => {
-    if (isLoggedIn) {
-      logout();
-      console.log("로그아웃 성공");
-    }
-  };
-
+  const { isLoggedIn } = useAuthStore();
   return (
     <div className={styles["auth-button__container"]}>
       {!isLoggedIn ? (
@@ -26,7 +18,7 @@ export default function AuthButton({ onOpen }: AuthButtonProps) {
             to="/signup"
             className={classNames(
               styles["auth-button__action"],
-              styles["auth-button__action--signup"]
+              styles["auth-button__action--signUp"]
             )}
           >
             회원가입
@@ -43,7 +35,7 @@ export default function AuthButton({ onOpen }: AuthButtonProps) {
           </button>
         </>
       ) : (
-        <Profile logout={handleAuthClick} />
+        <Profile />
       )}
     </div>
   );

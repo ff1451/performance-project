@@ -32,7 +32,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
       return;
     }
 
-    login();
+    login(userData.email, userData.nickname);
     alert(`${userData.nickname}님, 환영합니다!`);
     onClose();
   };
@@ -46,7 +46,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
             <X />
           </button>
         </div>
-        <div className={styles["modal__body"]}>
+        <form className={styles["modal__body"]}>
           <div className={styles["input__container"]}>
             <Input
               type="email"
@@ -66,7 +66,7 @@ export default function LoginModal({ onClose }: LoginModalProps) {
           <button onClick={handleLogin} className={styles["login-button"]}>
             로그인
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

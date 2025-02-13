@@ -3,13 +3,18 @@ import { FaUserCircle } from "react-icons/fa";
 import styles from "./profile.module.css";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
+import { useAuthStore } from "@/stores/useAuthStore";
 
-interface ProfileProps {
-  logout: () => void;
-}
-
-export default function Profile({ logout }: ProfileProps) {
+export default function Profile() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { isLoggedIn, logout, user } = useAuthStore();
+
+  const handleAuthClick = () => {
+    if (isLoggedIn) {
+      logout();
+      console.log("로그아웃 성공");
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -43,13 +48,16 @@ export default function Profile({ logout }: ProfileProps) {
             styles["profile__dropdown--visible"]
           )}
         >
+          <div className={styles["profile__dropdown-nickname"]}>
+            {user?.nickname} 님
+          </div>
           <Link to="/mypage" className={styles["profile__dropdown-item"]}>
             마이페이지
           </Link>
 
           <button
             onClick={() => {
-              logout();
+              handleAuthClick();
               setDropdownOpen(false);
             }}
             className={classNames(
