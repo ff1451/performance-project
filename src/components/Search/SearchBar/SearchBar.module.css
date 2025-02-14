@@ -1,0 +1,32 @@
+.search {
+  display: flex;
+  padding: 5px 0;
+  border-bottom: 1px solid black;
+  margin-left: auto;
+}
+
+.search__input {
+  border: none;
+  font-size: 16px;
+  padding: 5px;
+  background: transparent;
+  font-family: "Lato", sans-serif;
+}
+
+.search__input::placeholder {
+  opacity: 0.7;
+}
+
+.search__button {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  color: #30475e;
+  transition: transform 0.2s ease-in-out;
+}
+
+.search__button:hover {
+  transform: scale(1.1);
+  color: #e63946;
+}

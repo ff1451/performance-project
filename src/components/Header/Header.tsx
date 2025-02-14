@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Search } from "lucide-react";
 import styles from "./Header.module.css";
 import logo from "@/assets/logo.png";
 import AuthButton from "./AuthButton/AuthButton";
 import { useState } from "react";
 import LoginModal from "../LoginModal/LoginModal";
+import SearchBar from "@/components/Search/SearchBar/SearchBar";
 
 export function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -44,16 +44,7 @@ export function Header() {
         </ul>
       </nav>
 
-      <form className={styles.search}>
-        <input
-          className={styles.search__input}
-          type="text"
-          placeholder="검색"
-        />
-        <button className={styles.search__button} type="submit">
-          <Search />
-        </button>
-      </form>
+      <SearchBar />
 
       <AuthButton onOpen={modalOpenHandler} />
 
