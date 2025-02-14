@@ -1,11 +1,18 @@
-import { fetchPerformanceList } from "@/apis/fetchPerformanceList";
+import { fetchPerformances } from "@/apis/fetchPerformanceList";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export const usePerformanceList = (selectedCategory: string) => {
+export const usePerformanceList = (
+  selectedCategory: string = "",
+  searchKeyword: string = ""
+) => {
   return useInfiniteQuery({
-    queryKey: ["performanceList", selectedCategory],
+    queryKey: ["performanceList", selectedCategory, searchKeyword],
     queryFn: async ({ pageParam = 1 }) =>
-      fetchPerformanceList(pageParam, selectedCategory),
+      fetchPerformances({
+        page: pageParam,
+        genre: selectedCategory || undefined,
+        keyword: searchKeyword || undefined,
+      }),
     staleTime: 30 * 60 * 1000,
     refetchOnWindowFocus: false,
     initialPageParam: 1,
