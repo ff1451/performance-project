@@ -5,11 +5,17 @@ import styles from "./SearchPage.module.css";
 import { usePerformancePagination } from "@/hooks/usePerformancePagination";
 
 export default function SearchResult() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
+  const currentPage = Number(searchParams.get("page")) || 1;
 
-  const { paginatedData, currentPage, totalPages, handlePageChange } =
-    usePerformancePagination("", query);
+  const { paginatedData, totalPages, handlePageChange } =
+    usePerformancePagination(currentPage, "", query);
+
+  const handlePageChangeWithUrl = (page: number) => {
+    setSearchParams({ q: query, page: page.toString() });
+    handlePageChange(page);
+  };
 
   return (
     <div className={styles["searchResults__container"]}>
@@ -25,7 +31,7 @@ export default function SearchResult() {
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
-            onPageChange={handlePageChange}
+            onPageChange={handlePageChangeWithUrl}
           />
         </>
       )}
