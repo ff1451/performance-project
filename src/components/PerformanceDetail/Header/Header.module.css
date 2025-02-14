@@ -9,7 +9,6 @@
 
 .detail__container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -26,7 +25,7 @@
   font-weight: 600;
   padding: 4px 8px;
   border-radius: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .detail__genre--연극 {
@@ -83,7 +82,7 @@
 }
 
 .detail__booking-button {
-  background: #f44336;
+  background: #003366;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -95,5 +94,30 @@
 }
 
 .detail__booking-button:hover {
-  background: #c62828;
+  background: #002244;
+}
+.detail__button-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail__favorite-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.8rem;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.detail__favorite-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+.heart-icon {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.3s ease-in-out, stroke 0.3s ease-in-out;
+  stroke: #e63946;
 }
