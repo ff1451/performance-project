@@ -12,6 +12,7 @@ export default function SearchBar() {
     if (query.trim()) {
       navigate(`/search?q=${encodeURIComponent(query)}`);
     }
+    setQuery("");
   };
 
   return (
