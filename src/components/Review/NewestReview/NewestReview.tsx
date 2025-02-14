@@ -1,23 +1,15 @@
 import { useEffect, useState } from "react";
 import styles from "./NewestReview.module.css";
-import { Review } from "@/types/Review";
+import { useReviewStore } from "@/stores/useReviewStore";
 import StarRating from "../StarRating/StarRating";
 
 export default function NewestReview() {
-  const [newestReviews, setNewestReviews] = useState<Review[]>([]);
+  const { getNewestReviews } = useReviewStore();
+  const [newestReviews, setNewestReviews] = useState(getNewestReviews());
 
   useEffect(() => {
-    const allReviews = JSON.parse(localStorage.getItem("reviews") || "[]");
-
-    const sortedReviews = allReviews
-      .sort(
-        (a: Review, b: Review) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-      .slice(0, 5);
-
-    setNewestReviews(sortedReviews);
-  }, []);
+    setNewestReviews(getNewestReviews());
+  }, [getNewestReviews]);
 
   return (
     <div className={styles["review-list"]}>
