@@ -14,7 +14,8 @@ export default function LoginModal({ onClose }: LoginModalProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
     if (!email || !password) {
       setError("이메일과 비밀번호를 입력하세요.");
       return;
