@@ -4,16 +4,26 @@ import { xmlToJson } from "@/utils/xmlToJson";
 import { Performance } from "@/types/performance";
 import { getMonthRange } from "@/utils/date";
 import { fetchWithFallback } from "@/utils/fetchWithFallBack";
+
 const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
 
-export async function fetchPerformanceList(
-  pageParam: number,
-  genre: string,
-  year?: number,
-  month?: number
-): Promise<Performance[]> {
+interface FetchPerformanceOptions {
+  page?: number;
+  genre?: string;
+  year?: number;
+  month?: number;
+  keyword?: string;
+}
+
+export async function fetchPerformances({
+  page = 1,
+  genre,
+  year,
+  month,
+  keyword,
+}: FetchPerformanceOptions): Promise<Performance[]> {
   try {
-    const genreCode = GENRE_CODES[genre] || "";
+    const genreCode = genre ? GENRE_CODES[genre] || "" : "";
 
     let stdate = "20250101";
     let eddate = "20251231";
@@ -24,10 +34,18 @@ export async function fetchPerformanceList(
       eddate = range.eddate;
     }
 
-    const defaultUrl = `${BASE_URL}/pblprfr?service=${API_KEY}&stdate=${stdate}&eddate=${eddate}&cpage=${pageParam}&rows=100${
-      genreCode ? `&shcate=${genreCode}` : ""
-    }`;
+    const queryParams = new URLSearchParams({
+      service: API_KEY,
+      stdate,
+      eddate,
+      cpage: page.toString(),
+      rows: "100",
+    });
 
+    if (genreCode) queryParams.append("shcate", genreCode);
+    if (keyword && keyword.trim()) queryParams.append("shprfnm", keyword);
+
+    const defaultUrl = `${BASE_URL}/pblprfr?${queryParams.toString()}`;
     const proxyUrls = getProxyUrls(defaultUrl);
 
     const xmlString = await fetchWithFallback(proxyUrls);
@@ -49,7 +67,7 @@ export async function fetchPerformanceList(
       state: item.prfstate || "",
     }));
   } catch (error) {
-    console.error("공연 목록을 가져오는 중 오류 발생:", error);
+    console.error("공연 데이터를 가져오는 중 오류 발생:", error);
     return [];
   }
 }
