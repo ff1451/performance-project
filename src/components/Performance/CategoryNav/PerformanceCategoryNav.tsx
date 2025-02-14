@@ -1,10 +1,15 @@
-import { usePerformanceListStore } from "@/stores/usePerformanceListStore";
 import styles from "./PerformanceCategoryNav.module.css";
 import { categories } from "@/constants/category";
 
-export default function PerformanceCategoryNav() {
-  const { selectedCategory, setSelectedCategory } = usePerformanceListStore();
+interface PerformanceCategoryNavProps {
+  selectedCategory: string;
+  setSelectedCategory: (category: string) => void;
+}
 
+export default function PerformanceCategoryNav({
+  selectedCategory,
+  setSelectedCategory,
+}: PerformanceCategoryNavProps) {
   return (
     <ul className={styles["performance__genre-nav"]}>
       {categories.map((category, index) => (
