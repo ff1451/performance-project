@@ -1,7 +1,7 @@
-import { fetchPerformanceList } from "@/apis/fetchPerformanceList";
+import { fetchPerformances } from "@/apis/fetchPerformanceList";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-export function usePerformanceListByMonth(
+export function useMonthlyPerformanceList(
   selectedCategory: string = "",
   year: number,
   month: number
@@ -9,7 +9,12 @@ export function usePerformanceListByMonth(
   return useInfiniteQuery({
     queryKey: ["performanceList", selectedCategory, year, month],
     queryFn: async ({ pageParam = 1 }) =>
-      fetchPerformanceList(pageParam, selectedCategory, year, month),
+      fetchPerformances({
+        page: pageParam,
+        genre: selectedCategory,
+        year,
+        month,
+      }),
     staleTime: 30 * 60 * 1000,
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
