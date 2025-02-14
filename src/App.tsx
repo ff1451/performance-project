@@ -1,15 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./styles/App.css";
-import { Header } from "./components/Header/Header";
-import Home from "./pages/HomePage/Home";
-import PerformanceListPage from "./pages/PerformanceListPage/PerformanceListPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import PerformanceDetail from "./pages/PerformanceDetailPage/PerformanceDetailPage";
-import Footer from "./components/Footer/Footer";
-import SignUp from "./components/SignUp/SignUp";
+import "./styles/App.css";
+import Header from "@/components/Header/Header";
+import Home from "@/pages/HomePage/Home";
+import PerformanceList from "@/pages/PerformanceListPage/PerformanceListPage";
+import PerformanceDetail from "@/pages/PerformanceDetailPage/PerformanceDetailPage";
+import Footer from "@/components/Footer/Footer";
+import SignUp from "@/pages/SignUpPage/SignUpPage";
+import SearchResult from "./pages/SearchPage/SearchPage";
 
 const queryClient = new QueryClient();
-const basename = "/performance-project";
+const basename = "/performance-project/";
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -18,9 +19,10 @@ function App() {
         <main className="main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="performances" element={<PerformanceListPage />} />
+            <Route path="performances" element={<PerformanceList />} />
             <Route path="performances/:id" element={<PerformanceDetail />} />
             <Route path="signup" element={<SignUp />} />
+            <Route path="search" element={<SearchResult />} />
           </Routes>
         </main>
         <Footer />

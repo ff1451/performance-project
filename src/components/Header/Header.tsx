@@ -6,7 +6,7 @@ import { useState } from "react";
 import LoginModal from "../LoginModal/LoginModal";
 import SearchBar from "@/components/Search/SearchBar/SearchBar";
 
-export function Header() {
+export default function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const modalOpenHandler = () => {
