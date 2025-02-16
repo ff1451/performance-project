@@ -7,10 +7,8 @@ export function usePerformancePagination(
   category?: string,
   query?: string
 ) {
-  const { data, fetchNextPage, hasNextPage } = usePerformanceList(
-    category,
-    query
-  );
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+    usePerformanceList(category, query);
 
   const allPerformances = data?.pages.flat() || [];
   const totalPages = Math.ceil(allPerformances.length / PAGE_SIZE);
@@ -27,5 +25,5 @@ export function usePerformancePagination(
     }
   };
 
-  return { paginatedData, totalPages, handlePageChange };
+  return { paginatedData, totalPages, handlePageChange, isLoading, isFetching };
 }

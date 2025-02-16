@@ -5,6 +5,7 @@ import CardList from "@/components/Performance/CardList/CardList";
 import { usePerformancePagination } from "@/hooks/usePerformancePagination";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import LoadingUI from "@/components/UI/LoadingUI/LoadingUI";
 
 export default function PerformanceList() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -12,7 +13,7 @@ export default function PerformanceList() {
 
   const currentPage = Number(searchParams.get("page")) || 1;
 
-  const { paginatedData, totalPages, handlePageChange } =
+  const { paginatedData, totalPages, handlePageChange, isLoading, isFetching } =
     usePerformancePagination(currentPage, selectedCategory);
 
   const handlePageChangeWithUrl = (page: number) => {
@@ -35,12 +36,13 @@ export default function PerformanceList() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <CardList performances={paginatedData} />
+      <CardList performances={paginatedData} isLoading={isLoading} />
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={handlePageChangeWithUrl}
       />
+      {!isLoading && isFetching && <LoadingUI />}
     </div>
   );
 }
