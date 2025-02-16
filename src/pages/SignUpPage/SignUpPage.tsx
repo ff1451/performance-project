@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/UI/Input/Input";
 import styles from "./SignupPage.module.css";
-import { validateEmail } from "@/utils/validate";
+import { validateEmail, validateNickname } from "@/utils/validate";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 export default function Signup() {
@@ -32,6 +32,10 @@ export default function Signup() {
     alert("회원가입 완료!");
     navigate("/");
   };
+  const handleNicknameBlur = () => {
+    if (!nickname) return;
+    setError(validateNickname(nickname));
+  };
 
   const handleEmailBlur = () => {
     if (!validateEmail(email)) {
@@ -59,6 +63,7 @@ export default function Signup() {
           placeholder="닉네임 입력"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
+          onBlur={handleNicknameBlur}
         />
         <Input
           label="비밀번호"
