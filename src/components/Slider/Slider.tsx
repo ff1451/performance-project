@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { boxoffice } from "@/types/performance";
 import { Link } from "react-router-dom";
-import { DirectionButton } from "@/components/UI/DirectionButton/DirectionButton";
 import styles from "./Slider.module.css";
+import SliderSkeleton from "./Skeleton/SliderSkeleton";
+import SliderNav from "./SliderNav/SliderNav";
 
 interface SliderProps {
   data: boxoffice[];
+  isLoading?: boolean;
 }
 
-export default function Slider({ data }: SliderProps) {
+export default function Slider({ data, isLoading = false }: SliderProps) {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(0);
@@ -46,49 +48,50 @@ export default function Slider({ data }: SliderProps) {
 
   return (
     <div className={styles["slider-container"]}>
-      <div className={styles["slider-container__left"]}>
-        <h2 className={styles["slider-container__title"]}>예매 순위</h2>
-        <div className={styles["slider-container__button-container"]}>
-          <DirectionButton direction="prev" onClick={prevSlide} />
-          <span className={styles["slider-container__page"]}>
-            {currentPage + 1} / {totalPages}
-          </span>
-          <DirectionButton direction="next" onClick={nextSlide} />
-        </div>
-      </div>
+      <SliderNav
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPrev={prevSlide}
+        onNext={nextSlide}
+      />
 
-      <div className={styles["slider-container__right"]}>
-        <div className={styles["slider-wrapper"]}>
-          {data
-            .slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage)
-            .map((item) => (
-              <div key={item.id} className={styles["slider-wrapper__item"]}>
-                <Link to={`/performances/${item.id}`}>
-                  <img
-                    src={item.poster}
-                    alt={item.name}
-                    className={styles["slider-wrapper__image"]}
-                  />
-                </Link>
-
-                <div className={styles["slider-wrapper__text"]}>
-                  <Link
-                    to={`/performances/${item.id}`}
-                    className={styles["slider-wrapper__link"]}
-                  >
-                    <h3 className={styles["slider-wrapper__name"]}>
-                      {item.name}
-                    </h3>
+      {isLoading ? (
+        <SliderSkeleton itemsCount={itemsPerPage} />
+      ) : (
+        <div className={styles["slider-container__right"]}>
+          <div className={styles["slider-wrapper"]}>
+            {data
+              .slice(
+                currentPage * itemsPerPage,
+                (currentPage + 1) * itemsPerPage
+              )
+              .map((item) => (
+                <div key={item.id} className={styles["slider-wrapper__item"]}>
+                  <Link to={`/performances/${item.id}`}>
+                    <img
+                      src={item.poster}
+                      alt={item.name}
+                      className={styles["slider-wrapper__image"]}
+                    />
                   </Link>
-
-                  <p className={styles["slider-wrapper__period"]}>
-                    {item.period}
-                  </p>
+                  <div className={styles["slider-wrapper__text"]}>
+                    <Link
+                      to={`/performances/${item.id}`}
+                      className={styles["slider-wrapper__link"]}
+                    >
+                      <h3 className={styles["slider-wrapper__name"]}>
+                        {item.name}
+                      </h3>
+                    </Link>
+                    <p className={styles["slider-wrapper__period"]}>
+                      {item.period}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
