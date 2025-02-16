@@ -61,7 +61,9 @@ export default function Info({ performance }: InfoProps) {
           <tr>
             <th>주최, 주관</th>
             <td>
-              {labelCompanies(performance.host, "주최")}{" "}
+              {performance.host
+                ? `${labelCompanies(performance.host, "주최")}`
+                : ""}{" "}
               {performance.organizer
                 ? `, ${labelCompanies(performance.organizer, "주관")}`
                 : ""}

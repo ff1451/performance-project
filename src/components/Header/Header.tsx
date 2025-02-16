@@ -31,16 +31,6 @@ export default function Header() {
               공연 목록
             </Link>
           </li>
-          <li>
-            <Link to="/reviews" className={styles.nav__item}>
-              임시
-            </Link>
-          </li>
-          <li>
-            <Link to="/schedule" className={styles.nav__item}>
-              임시
-            </Link>
-          </li>
         </ul>
       </nav>
 
