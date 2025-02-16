@@ -4,7 +4,7 @@ import logo from "@/assets/logo.png";
 import AuthButton from "./AuthButton/AuthButton";
 import { useState } from "react";
 import LoginModal from "../LoginModal/LoginModal";
-import SearchBar from "@/components/Search/SearchBar/SearchBar";
+import SearchBar from "@/components/Header/SearchBar/SearchBar";
 
 export default function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
