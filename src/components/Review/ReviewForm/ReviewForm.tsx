@@ -8,6 +8,7 @@ import LoginModal from "@/components/LoginModal/LoginModal";
 interface ReviewFormProps {
   performanceId: string;
   performanceName: string;
+  performancePoster: string;
   editingReview?: Review | null;
   onSave: (review: Review) => void;
   onCancel?: () => void;
@@ -16,6 +17,7 @@ interface ReviewFormProps {
 export default function ReviewForm({
   performanceId,
   performanceName,
+  performancePoster,
   editingReview,
   onSave,
   onCancel,
@@ -60,7 +62,9 @@ export default function ReviewForm({
       id: editingReview ? editingReview.id : Date.now().toString(),
       performanceId,
       performanceName,
+      performancePoster,
       nickname: user.nickname,
+      email: user.email,
       rating,
       comment,
       createdAt: new Date().toISOString(),

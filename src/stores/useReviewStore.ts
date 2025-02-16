@@ -9,6 +9,7 @@ interface ReviewState {
   deleteReview: (id: string) => void;
   getReviewsByPerformance: (performanceId: string) => Review[];
   getNewestReviews: () => Review[];
+  updateNicknameInReviews: (email: string, newNickname: string) => void;
 }
 
 export const useReviewStore = create<ReviewState>()(
@@ -45,6 +46,16 @@ export const useReviewStore = create<ReviewState>()(
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
           )
           .slice(0, 5),
+
+      updateNicknameInReviews: (email, newNickname) => {
+        set((state) => ({
+          reviews: state.reviews.map((review) =>
+            review.email === email
+              ? { ...review, nickname: newNickname }
+              : review
+          ),
+        }));
+      },
     }),
     { name: "reviews-storage" }
   )

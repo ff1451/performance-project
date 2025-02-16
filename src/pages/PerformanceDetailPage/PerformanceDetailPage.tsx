@@ -38,7 +38,11 @@ export default function PerformanceDetail() {
       {activeTab === "info" ? (
         <DetailBody performance={data} />
       ) : (
-        <ReviewSection performanceId={id} performanceName={data.name} />
+        <ReviewSection
+          performanceId={id}
+          performanceName={data.name}
+          performancePoster={data.poster}
+        />
       )}
 
       <BookingModal

@@ -8,6 +8,7 @@ import PerformanceDetail from "@/pages/PerformanceDetailPage/PerformanceDetailPa
 import Footer from "@/components/Footer/Footer";
 import SignUp from "@/pages/SignUpPage/SignUpPage";
 import SearchResult from "./pages/SearchPage/SearchPage";
+import MyPage from "./pages/MyPage/MyPage";
 
 const queryClient = new QueryClient();
 const basename = "/performance-project/";
@@ -23,6 +24,7 @@ function App() {
             <Route path="performances/:id" element={<PerformanceDetail />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="search" element={<SearchResult />} />
+            <Route path="mypage" element={<MyPage />} />
           </Routes>
         </main>
         <Footer />

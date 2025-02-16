@@ -1,0 +1,43 @@
+.mypage {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: start;
+}
+
+.mypage__title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #222;
+  text-align: start;
+  margin-bottom: 32px;
+  border-bottom: 3px solid #ccc;
+  padding-bottom: 12px;
+}
+
+.mypage__section-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.mypage__profile,
+.mypage__favorites,
+.mypage__reviews {
+  margin-bottom: 40px;
+}
+
+.mypage__empty {
+  color: gray;
+  font-size: 16px;
+  text-align: center;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+}

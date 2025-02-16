@@ -4,13 +4,16 @@ import ReviewList from "./ReviewList/ReviewList";
 import Modal from "@/components/UI/Modal/Modal";
 import { useReviewStore } from "@/stores/useReviewStore";
 import { Review } from "@/types/Review";
+import styles from "./ReviewSection.module.css";
 
 export default function ReviewSection({
   performanceId,
   performanceName,
+  performancePoster,
 }: {
   performanceId: string;
   performanceName: string;
+  performancePoster: string;
 }) {
   const { getReviewsByPerformance, addReview, updateReview, deleteReview } =
     useReviewStore();
@@ -34,11 +37,11 @@ export default function ReviewSection({
       <ReviewForm
         performanceId={performanceId}
         performanceName={performanceName}
+        performancePoster={performancePoster}
         onSave={handleSaveReview}
       />
-
+      <h3 className={styles["review-list__title"]}>작성된 리뷰</h3>
       <ReviewList
-        performanceId={performanceId}
         reviews={reviews}
         onDelete={deleteReview}
         onEdit={(review) => {
@@ -52,6 +55,7 @@ export default function ReviewSection({
           <ReviewForm
             performanceId={performanceId}
             performanceName={performanceName}
+            performancePoster={performancePoster}
             editingReview={editingReview}
             onSave={handleSaveReview}
             onCancel={() => setIsModalOpen(false)}
