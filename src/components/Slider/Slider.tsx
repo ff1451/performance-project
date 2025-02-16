@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./Slider.module.css";
 import SliderSkeleton from "./Skeleton/SliderSkeleton";
 import SliderNav from "./SliderNav/SliderNav";
+import { ImagePreLoading } from "@/utils/ImagePreLoading";
 
 interface SliderProps {
   data: boxoffice[];
@@ -34,12 +35,21 @@ export default function Slider({ data, isLoading = false }: SliderProps) {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
-    intervalRef.current = window.setInterval(nextSlide, 2000);
+    intervalRef.current = window.setInterval(nextSlide, 4000);
   };
 
   useEffect(() => {
+    const nextSlide = (currentPage + 1) % totalPages;
+    const nextSlideItems = data.slice(
+      nextSlide * itemsPerPage,
+      (nextSlide + 1) * itemsPerPage
+    );
+    ImagePreLoading(nextSlideItems.map((item) => item.poster));
+  }, [currentPage, totalPages, data]);
+
+  useEffect(() => {
     if (data.length > 0) {
-      intervalRef.current = window.setInterval(nextSlide, 2000);
+      intervalRef.current = window.setInterval(nextSlide, 4000);
     }
     return () => {
       if (intervalRef.current !== null) clearInterval(intervalRef.current);
