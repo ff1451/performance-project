@@ -1,12 +1,17 @@
 import { Performance } from "@/types/performance";
 import styles from "./PerformanceList.module.css";
 import { Link } from "react-router-dom";
+import LoadingUI from "@/components/UI/LoadingUI/LoadingUI";
 
 interface PerformanceListProps {
   performances: Performance[];
+  isLoading?: boolean;
 }
 
-export function PerformanceList({ performances }: PerformanceListProps) {
+export function PerformanceList({
+  performances,
+  isLoading,
+}: PerformanceListProps) {
   return performances.length ? (
     <div className={styles["performance-list"]}>
       <h3 className={styles["performance-list__title"]}>공연 목록</h3>
@@ -33,6 +38,7 @@ export function PerformanceList({ performances }: PerformanceListProps) {
           </li>
         ))}
       </ul>
+      {isLoading && <LoadingUI />}
     </div>
   ) : (
     <div className={styles["performance-list__empty"]}>

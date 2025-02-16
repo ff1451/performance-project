@@ -5,7 +5,7 @@ import { CalendarHeader } from "./Header/CalendarHeader";
 import { CalendarGrid } from "./Grid/CalendarGrid";
 import { PerformanceList } from "./PerformanceList/PerformanceList";
 import styles from "./Calendar.module.css";
-import { usePerformanceListByMonth } from "@/hooks/usePerformanceListByMonth";
+import { useMonthlyPerformanceList } from "@/hooks/useMonthlyPerformanceList";
 import { useCalendarStore } from "@/stores/useCalendarStore";
 
 function Calendar() {
@@ -13,7 +13,7 @@ function Calendar() {
     useCalendarStore();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    usePerformanceListByMonth("", currentYear, currentMonth);
+    useMonthlyPerformanceList("", currentYear, currentMonth);
 
   const performances = data?.pages.flatMap((page) => page) || [];
 
@@ -21,11 +21,11 @@ function Calendar() {
     setSelectedDate(null);
   }, [currentYear, currentMonth]);
 
-  // useEffect(() => {
-  //   if (hasNextPage && !isFetchingNextPage) {
-  //     fetchNextPage();
-  //   }
-  // }, [hasNextPage, isFetchingNextPage]);
+  useEffect(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage]);
 
   const performanceMap = groupPerformancesByDate(
     performances,
@@ -53,6 +53,7 @@ function Calendar() {
             performances={
               selectedDate ? performanceMap[selectedDate] || [] : []
             }
+            isLoading={isFetchingNextPage}
           />
         </div>
       </div>

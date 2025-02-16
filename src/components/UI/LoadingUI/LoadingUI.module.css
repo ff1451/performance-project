@@ -1,0 +1,32 @@
+.loading-ui {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  font-size: 14px;
+  color: gray;
+}
+
+.loading-ui__spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #777;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: loading-ui__spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+.loading-ui__text {
+  font-size: 14px;
+  color: gray;
+}
+
+@keyframes loading-ui__spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
