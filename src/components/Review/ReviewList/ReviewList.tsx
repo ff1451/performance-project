@@ -21,12 +21,12 @@ export default function ReviewList({
   const { user } = useAuthStore();
 
   return (
-    <div className={styles["review-list"]}>
+    <ul className={styles["review-list"]}>
       {reviews.length === 0 ? (
         <p className={styles["review-list__empty"]}>아직 리뷰가 없습니다.</p>
       ) : (
         reviews.map((review) => (
-          <div key={review.id} className={styles["review-item"]}>
+          <li key={review.id} className={styles["review-item"]}>
             {showPerformanceInfo && (
               <div className={styles["review-item__performance-image"]}>
                 <Link
@@ -93,9 +93,9 @@ export default function ReviewList({
                 </div>
               )}
             </div>
-          </div>
+          </li>
         ))
       )}
-    </div>
+    </ul>
   );
 }
