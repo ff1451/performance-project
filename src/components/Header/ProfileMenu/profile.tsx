@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import styles from "./profile.module.css";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 export default function Profile() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { isLoggedIn, logout, user } = useAuthStore();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleAuthClick = () => {
     if (isLoggedIn) {
@@ -17,19 +18,22 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    if (!dropdownOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (event.target instanceof HTMLElement) {
-        if (!event.target.closest(`.${styles.profile}`)) {
-          setDropdownOpen(false);
-        }
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setDropdownOpen(false);
       }
     };
 
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [dropdownOpen]);
 
   const toggleDropdown = (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -37,7 +41,7 @@ export default function Profile() {
   };
 
   return (
-    <div className={styles["profile__container"]}>
+    <div className={styles["profile__container"]} ref={dropdownRef}>
       <button className={styles["profile__button"]} onClick={toggleDropdown}>
         <FaUserCircle />
       </button>
