@@ -1,6 +1,6 @@
 import { BookingSite } from "@/types/performance";
 import styles from "./BookingModal.module.css";
-import Modal from "../UI/Modal/Modal";
+import Modal from "../../UI/Modal/Modal";
 
 interface BookingModalProps {
   isOpen: boolean;

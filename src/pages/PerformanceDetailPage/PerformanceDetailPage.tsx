@@ -1,7 +1,7 @@
 import { usePerformanceDetail } from "@/hooks/usePerformanceDetail";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import BookingModal from "@/components/BookingModal/BookingModal";
+import BookingModal from "@/components/PerformanceDetail/BookingModal/BookingModal";
 import DetailHeader from "@/components/PerformanceDetail/Header/Header";
 import Info from "@/components/PerformanceDetail/PerformanceInfo/Info";
 import Tab from "@/components/PerformanceDetail/Tab/Tab";
