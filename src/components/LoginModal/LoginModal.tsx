@@ -2,7 +2,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { useState } from "react";
 import { Input } from "../UI/Input/Input";
 import styles from "./LoginModal.module.css";
-import { X } from "lucide-react";
+import Modal from "../UI/Modal/Modal";
 
 interface LoginModalProps {
   onClose: () => void;
@@ -39,36 +39,33 @@ export default function LoginModal({ onClose }: LoginModalProps) {
   };
 
   return (
-    <div className={styles["modal-overlay"]}>
-      <div className={styles["modal-content"]}>
-        <div className={styles["modal__header"]}>
-          <h2 className={styles["modal__title"]}>로그인</h2>
-          <button onClick={onClose} className={styles.closeButton}>
-            <X />
-          </button>
-        </div>
-        <form className={styles["modal__body"]}>
-          <div className={styles["input__container"]}>
-            <Input
-              type="email"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Input
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          {error && <p className={styles.errorMessage}>{error}</p>}
-          <button onClick={handleLogin} className={styles["login-button"]}>
-            로그인
-          </button>
-        </form>
+    <Modal onClose={onClose} width="400px" height="350px">
+      <div className={styles["login-modal__header"]}>
+        <h2 className={styles["login-modal__title"]}>로그인</h2>
       </div>
-    </div>
+      <form className={styles["login-modal__body"]}>
+        <div className={styles["login-modal__input-container"]}>
+          <Input
+            type="email"
+            placeholder="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        {error && (
+          <p className={styles["login-modal__error-message"]}>{error}</p>
+        )}
+        <button onClick={handleLogin} className={styles["login-modal__button"]}>
+          로그인
+        </button>
+      </form>
+    </Modal>
   );
 }
