@@ -1,39 +1,29 @@
-import { boxoffice } from "@/types/performance";
-import { BASE_URL, getProxyUrls } from "@/constants/url";
-import { xmlToJson } from "@/utils/xmlToJson";
-import { getRelativeDateRange } from "@/utils/date";
-import { fetchWithFallback } from "@/utils/fetchWithFallBack";
+import { BoxOffice, ResponseBoxOffice } from "@/types/performance";
 
-const API_KEY = import.meta.env.VITE_KOPIS_API_KEY;
+const API_URL = "http://localhost/performance-project/server/getBookingRanking.php";
 
-export async function fetchBookingRanking(): Promise<boxoffice[]> {
+export async function fetchBookingRanking(): Promise<BoxOffice[]> {
   try {
-    const { stdate, eddate } = getRelativeDateRange(31);
+    const response = await fetch(API_URL);
+    const result = await response.json();
 
-    const defaultUrl = `${BASE_URL}/boxoffice?service=${API_KEY}&stdate=${stdate}&eddate=${eddate}`;
-
-    const proxyUrls = getProxyUrls(defaultUrl);
-
-    const xmlString = await fetchWithFallback(proxyUrls);
-    console.log("받아온 XML:", xmlString);
-
-    const data = xmlToJson(xmlString);
-    console.log("변환된 JSON 데이터:", data);
-
-    const rankings = data.boxof;
-
-    return rankings.map((item: any) => ({
-      ranking: Number(item.rnum) || 0,
-      name: item.prfnm || "",
-      period: item.prfpd || "",
-      place: item.prfplcnm || "",
-      seatCount: Number(item.seatcnt) || 0,
-      playCount: Number(item.prfdtcnt) || 0,
-      area: item.area || "",
-      poster: item.poster || "",
-      id: item.mt20id || "",
-      genre: item.cate || "",
-    }));
+    if (result.status === "success") {
+      return result.data.map((item: ResponseBoxOffice) => ({
+        ranking: Number(item.rnum) || 0,
+        name: item.prfnm || "",
+        period: item.prfpd || "",
+        place: item.prfplcnm || "",
+        seatCount: Number(item.seatcnt) || 0,
+        playCount: Number(item.prfdtcnt) || 0,
+        area: item.area || "",
+        poster: item.poster || "",
+        id: item.mt20id || "",
+        genre: item.cate || "",
+      }));
+    } else {
+      console.error("데이터 조회 실패:", result.message);
+      return [];
+    }
   } catch (error) {
     console.error("예매 순위를 가져오는 중 오류 발생:", error);
     return [];

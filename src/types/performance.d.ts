@@ -41,7 +41,7 @@ export interface BookingSite {
   url: string;
 }
 
-export interface boxoffice {
+export interface BoxOffice {
   place: string;
   seatCount: number;
   ranking: number;
@@ -52,4 +52,17 @@ export interface boxoffice {
   genre: string;
   playCount: number;
   area: string;
+}
+
+interface ResponseBoxOffice {
+  rnum: string;
+  prfnm: string;
+  prfpd: string;
+  prfplcnm: string;
+  seatcnt: string;
+  prfdtcnt: string;
+  area: string;
+  poster: string;
+  mt20id: string;
+  cate: string;
 }
